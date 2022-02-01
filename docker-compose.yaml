@@ -1,0 +1,10 @@
+version: "3.3"
+services:
+  WRF:
+    image: "sagunkayastha/wrf"
+    volumes:
+      - ~/home/laanta/sagun/docker/wrf_docker:/home/
+    stdin_open: true
+    tty: true
+  
+# docker run --rm -v ~/home/laanta/sagun/docker/wrf_docker:/home/ -it  sagunkayastha/wrf:latest
