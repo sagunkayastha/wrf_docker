@@ -2,6 +2,8 @@
 
 Dockerfile for Weather Research and Forecasting Model with WRF Pre-Processing System.
 
+WRF Model Version 4.3.3
+WPS version 4.3.1
 WRF compile case -  em_real
 
 ## Libraries Compiled:
