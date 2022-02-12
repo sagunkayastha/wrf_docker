@@ -23,3 +23,7 @@ WRF compile case -  em_real
 - scikit-learn
 
 Steps used from [compiling_wrf](https://www2.mmm.ucar.edu/wrf/OnLineTutorial/compilation_tutorial.php)
+
+Dockerfile for WRF build on [pangeoml-notebook](https://hub.docker.com/r/pangeo/ml-notebook) 
+
+Final Build image https://hub.docker.com/r/sagunkayastha/wrf_with_pangeoml
