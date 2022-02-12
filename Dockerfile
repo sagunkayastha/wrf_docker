@@ -1,15 +1,14 @@
 
 FROM ubuntu:20.04
 
-RUN apt-get update 
-RUN apt-get install -yq tzdata && \
+RUN apt-get update && \
+    apt-get install -yq tzdata && \
     ln -fs /usr/share/zoneinfo/Asia/Kathmandu /etc/localtime && \
     dpkg-reconfigure -f noninteractive tzdata
 
 # GCC CPP GFORTRAN
-RUN apt-get update 
-RUN apt-get install -y sudo git bash unattended-upgrades --fix-missing
-RUN apt-get install -y wget csh tar build-essential gfortran m4 zlib1g-dev
+RUN apt-get update &&\
+    apt-get install -y sudo git bash unattended-upgrades wget csh tar build-essential gfortran m4 zlib1g-dev
 
 WORKDIR /BUILD_WRF/LIBRARIES
 RUN wget -q https://www2.mmm.ucar.edu/wrf/OnLineTutorial/compile_tutorial/tar_files/mpich-3.0.4.tar.gz \
@@ -20,7 +19,7 @@ RUN wget -q https://www2.mmm.ucar.edu/wrf/OnLineTutorial/compile_tutorial/tar_fi
 
 
 ## Install Libraries
-ENV DIR=/BUILD_WRF/LIBRARIES CC=gcc CXX=g++ FC=gfortran FCFLAGS=-m64 F77=gfortran FFLAGS=-m64 JASPERLIB=$DIR/grib2/lib \
+ENV DIR=/Build_WRF/Build_WRF/LIBRARIES CC=gcc CXX=g++ FC=gfortran FCFLAGS=-m64 F77=gfortran FFLAGS=-m64 JASPERLIB=$DIR/grib2/lib \
     JASPERINC=$DIR/grib2/include LDFLAGS=-L$DIR/grib2/lib CPPFLAGS=-I$DIR/grib2/include
 
 ## NETCDF
@@ -74,16 +73,3 @@ RUN git clone https://github.com/wrf-model/WPS.git && cd WPS &&\
 
 RUN echo "wget https://www2.mmm.ucar.edu/wrf/src/wps_files/geog_high_res_mandatory.tar.gz" >> geog.sh &&\
     chmod +x geog.sh
-
-RUN sudo apt install -y build-essential cmake git libgtk2.0-dev pkg-config libavcodec-dev libavformat-dev libswscale-dev \
-python-dev python-numpy libtbb2 libtbb-dev libjpeg-dev libpng-dev libtiff-dev libdc1394-22-dev python3-pip python3-numpy curl nano net-tools wget
-
-RUN ln -sf /usr/bin/python3 /usr/bin/python && \
-    ln -sf /usr/bin/pip3 /usr/bin/pip
-
-## Python libraries
-RUN pip install pandas ipykernel matplotlib jupyter jupyterlab scikit-learn 
-
-EXPOSE 8888
-
-# ENTRYPOINT ["jupyter", "lab","--ip=0.0.0.0","--allow-root"]
