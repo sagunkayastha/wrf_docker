@@ -1,10 +1,13 @@
 version: "3.3"
 services:
   WRF:
-    image: "sagunkayastha/wrf"
+    image: "sagunkayastha/wrf_with_pangeo"
     volumes:
-      - ~/home/laanta/sagun/docker/wrf_docker:/home/
+      - /home/laanta/sagun/WRF/WRF:/Build_WRF/WRF
+      - /home/laanta/sagun/WRF/WPS_GEOG:/Build_WRF/WPS_GEOG
+      - /home/laanta/sagun/WRF/GFS:/Build_WRF/GFS 
     stdin_open: true
     tty: true
-  
+    environment:
+      - DISPLAY=$DISPLAY
 # docker run --rm -v ~/home/laanta/sagun/docker/wrf_docker:/home/ -it  sagunkayastha/wrf:latest
